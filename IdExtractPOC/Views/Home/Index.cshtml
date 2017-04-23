@@ -1,0 +1,41 @@
+﻿@model IdExtractPOC.Contracts.DriverInfo
+<head>
+    <title>JSSample</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<div>
+    Instructions: Take a picture of a driver license in good lighting. This will extract what information it can and display it back.
+</div>
+<form method="post" asp-action="Index" asp-controller="Home" enctype="multipart/form-data">
+    <input class="form-control" type="file" accept="image/*" name="file">
+    <input type="submit" value="Upload" class="btn btn-sm btn-primary" />
+</form>
+
+
+
+@if (Model != null)
+{
+    <div>Potential Names</div>
+    <ul>
+        @foreach (var name in Model.PotentialNames)
+        {
+            <li>@name</li>
+        }
+    </ul>
+
+    <div>Potential Addresses</div>
+    <ul>
+        @foreach (var address in Model.PotentialAddresses)
+        {
+            <li>@address.FullAddress</li>
+        }
+    </ul>
+
+    <div>Potential Date Of Birth</div>
+    <ul>
+        @foreach (var dob in Model.PotentialDatesOfBirth)
+        {
+            <li>@dob.ToString("MM/dd/yyyy")</li>
+        }
+    </ul>
+}
